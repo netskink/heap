@@ -94,6 +94,34 @@ int * build_max_heap(int *pHeap) {
 	return pHeap;
 }
 
+
+int * heap_sort(int *pHeap) {
+	int i;
+	int SIZE = pHeap[0];
+	int iTemp;
+
+	pHeap = build_max_heap(pHeap);
+	for (i=SIZE; i>=2; i--) {
+		iTemp = pHeap[1];
+		pHeap[1] = pHeap[i];
+		pHeap[i] = iTemp;
+		pHeap[0] = pHeap[0] - 1;
+		pHeap = max_heapify(pHeap, 1);
+	}
+
+	return pHeap;
+}
+
+
+void dump_array(int *p, int len) {
+	int i;
+	for (i=0;i<len;i++) {
+		printf("%d: %d\n",i,p[i]);
+	}
+}
+
+
+
 int test1() {
 
 	int pHeap[3+1] = {3,1,2,3};
@@ -109,7 +137,6 @@ int test1() {
 	return 0;
 
 }
-
 int test2() {
 
 	int pHeap[5+1] = {5,3,5,1,0,2};
@@ -142,7 +169,23 @@ int test3() {
 
 }
 
+int test4() {
 
+	int pHeap[7+1] = {7,6,3,5,4,1,0,2};
+
+	printf("-Before v -v-v-v-\n");
+	breadth_dump(pHeap);
+
+	printf("-----------------\n");
+	heap_sort(pHeap);
+	
+	breadth_dump(pHeap);
+	printf("-After ^ -^-^-^-^\n");
+	dump_array(pHeap,8);
+	return 0;
+
+
+}
 
 int main(int argc, char *argv[]) {
 
@@ -159,7 +202,9 @@ int main(int argc, char *argv[]) {
 	test1();
 	test2();
 	test3();
+	test4();
 
+	
 	exit(iRC);
 
 }
