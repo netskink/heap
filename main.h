@@ -8,3 +8,4 @@
 // then use  DBGPRINT("testing %s\n", "foo");
 
 
+void dump_array(int *p, int len);
